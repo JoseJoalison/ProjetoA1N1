@@ -1,7 +1,6 @@
 #ifndef TABELA_H
 #define TABELA_H
 
-#define N 2   // número máximo de processos
 #define ERRO -1
 
 // Estrutura que representa um registro do arquivo CSV
