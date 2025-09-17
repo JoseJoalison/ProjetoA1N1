@@ -35,7 +35,13 @@ typedef struct {
 } Tabela;
 
     //Protótipo da função para ler os dados do arquivo CSV
-    Tabela *LerDados(char * NomeArquivo);
+    Tabela *LerDados(char *NomeArquivo, int *num_registros);
 
+    //Protótipo da função para calcular a diferença entre duas datas
+    int DifData(char *Data1, char *Data2);
+
+    // Protótipo da função para contar flags
+    int ContaFlags(const Tabela *F, int num_registros, int flag);
+    
 
 #endif
