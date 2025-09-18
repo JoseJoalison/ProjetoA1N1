@@ -1,9 +1,9 @@
 #ifndef TABELA_H
 #define TABELA_H
 
-#define N 2000   // número máximo de processos
 #define ERRO -1
 
+// Estrutura que representa um registro do arquivo CSV
 typedef struct {
     long long id_processo;
     char numero_sigilo[100];
@@ -34,8 +34,14 @@ typedef struct {
     int susm1;
 } Tabela;
 
-Tabela *LerDados(char * NomeArquivo);
+    //Protótipo da função para ler os dados do arquivo CSV
+    Tabela *LerDados(char *NomeArquivo, int *num_registros);
 
-int Datas(char *data);
+    //Protótipo da função para calcular a diferença entre duas datas
+    int DifData(char *Data1, char *Data2);
+
+    // Protótipo da função para contar flags
+    int ContaFlags(const Tabela *F, int num_registros, int flag);
+    
 
 #endif
