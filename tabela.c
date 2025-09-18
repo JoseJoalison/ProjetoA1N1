@@ -43,89 +43,88 @@ Tabela *LerDados(char *NomeArquivo, int *num_registros) {
             }
         }
 
-        
-        
-    char *start = linha;  // Ponteiro para o início da linha
-    char *end;
+    //Inicializa o ponteiro para o início da linha
+    char *inicioString = linha; 
+    char *fimString;
     int campo = 0;
     int campos_lidos = 0;
     
-    // Loop manual para extrair tokens separados poe ';'
+    // Loop manual para extrair tokens separados por ';'
     //Iniciando a leitura caso a linha não esteja vazia
 
-     while (*start != '\0') {
+    while (*inicioString != '\0') {
 
     // Encontrar o próximo ';', aponta para o final do token
-    end = strchr(start, ';');
+    fimString = strchr(inicioString, ';');
     
-    // Se não encotrar ',' (retorno NULL do strchr)
-        if (end == NULL) {
-            end = start + strlen(start);  // faz o end apontar para o fim da string 
+    // Se não encotrar ';' (retorno NULL do strchr)
+        if (fimString == NULL) {
+            fimString = inicioString + strlen(inicioString);  // faz o fimString apontar para o fim da string 
         }
     
     // Substituir ';' por '\0' para terminar o token
-    *end = '\0';
+    *fimString = '\0';
 
     //verifica se a string é vazia
-    int vazio = (start[0] == '\0');        
+    int vazio = (inicioString[0] == '\0');        
 
     //switch para cada campo, convertendo e armazenando no struct
     //Campos com condicionais caso estejam vazias (int = 0 e string = Vazio)
         switch (campo) {
             case 0:  
-            P[i].id_processo = vazio ? 2 : atoll(start) ; campos_lidos++; break;
+            P[i].id_processo = vazio ? 0 : atoll(inicioString) ; campos_lidos++; break;
             case 1:  
-            strncpy(P[i].numero_sigilo, vazio ? "Vazio" : start, sizeof(P[i].numero_sigilo)); campos_lidos++; break;
+            strncpy(P[i].numero_sigilo, vazio ? "Vazio" : inicioString, sizeof(P[i].numero_sigilo)); campos_lidos++; break;
             case 2:  
-            strncpy(P[i].sigla_grau, start, sizeof(P[i].sigla_grau)); campos_lidos++; break;
+            strncpy(P[i].sigla_grau, vazio ? "Vazio" : inicioString, sizeof(P[i].sigla_grau)); campos_lidos++; break;
             case 3:  
-            strncpy(P[i].procedimento, start, sizeof(P[i].procedimento)); campos_lidos++; break;
+            strncpy(P[i].procedimento, vazio ? "Vazio" : inicioString, sizeof(P[i].procedimento)); campos_lidos++; break;
             case 4:  
-            strncpy(P[i].ramo_justica, start, sizeof(P[i].ramo_justica)); campos_lidos++; break;
+            strncpy(P[i].ramo_justica, vazio ? "Vazio" : inicioString, sizeof(P[i].ramo_justica)); campos_lidos++; break;
             case 5:  
-            strncpy(P[i].sigla_tribunal, start, sizeof(P[i].sigla_tribunal)); campos_lidos++; break;
+            strncpy(P[i].sigla_tribunal, vazio ? "Vazio" : inicioString, sizeof(P[i].sigla_tribunal)); campos_lidos++; break;
             case 6:  
-            P[i].id_tribunal = atoi(start); campos_lidos++; break;
+            P[i].id_tribunal = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 7:  
-            P[i].recurso = atoi(start); campos_lidos++; break;
+            P[i].recurso = atoi(inicioString); campos_lidos++; break;
             case 8:  
-            P[i].id_ultimo_oj = atoi(start); campos_lidos++; break;
+            P[i].id_ultimo_oj = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 9:  
-            strncpy(P[i].dt_recebimento, start, sizeof(P[i].dt_recebimento)); campos_lidos++; break;
+            strncpy(P[i].dt_recebimento, vazio ? "Vazio" : inicioString, sizeof(P[i].dt_recebimento)); campos_lidos++; break;
             case 10: 
-            P[i].id_ultima_classe = atoi(start); campos_lidos++; break;
+            P[i].id_ultima_classe = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 11:
-            P[i].flag_violencia_domestica = atoi(start); campos_lidos++; break;
+            P[i].flag_violencia_domestica = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 12: 
-            P[i].flag_feminicidio = atoi(start); campos_lidos++; break;
+            P[i].flag_feminicidio = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 13: 
-            P[i].flag_ambiental = atoi(start); campos_lidos++; break;
+            P[i].flag_ambiental = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 14: 
-            P[i].flag_quilombolas = atoi(start); campos_lidos++; break;
+            P[i].flag_quilombolas = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 15:
-            P[i].flag_indigenas = atoi(start); campos_lidos++; break;
+            P[i].flag_indigenas = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 16: 
-            P[i].flag_infancia = atoi(start); campos_lidos++; break;
+            P[i].flag_infancia = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 17: 
-            P[i].decisao = atoi(start); campos_lidos++; break;
+            P[i].decisao = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 18: 
-            strncpy(P[i].dt_resolvido, start, sizeof(P[i].dt_resolvido)); campos_lidos++; break;
+            strncpy(P[i].dt_resolvido, vazio ? "Vazio" : inicioString, sizeof(P[i].dt_resolvido)); campos_lidos++; break;
             case 19: 
-            P[i].cnm1 = atoi(start); campos_lidos++; break;
+            P[i].cnm1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 20: 
-            P[i].primeirasentm1 = atoi(start); campos_lidos++; break;
+            P[i].primeirasentm1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 21: 
-            P[i].baixm1 = atoi(start); campos_lidos++; break;
+            P[i].baixm1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 22: 
-            P[i].decm1 = atoi(start); campos_lidos++; break;
+            P[i].decm1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 23: 
-            P[i].mpum1 = atoi(start); campos_lidos++; break;
+            P[i].mpum1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 24: 
-            P[i].julgadom1 = atoi(start); campos_lidos++; break;
+            P[i].julgadom1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 25: 
-            P[i].desm1 = atoi(start); campos_lidos++; break;
+            P[i].desm1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             case 26: 
-            P[i].susm1 = atoi(start); campos_lidos++; break;
+            P[i].susm1 = vazio ? 0 : atoi(inicioString); campos_lidos++; break;
             default: break;
         }  
 
@@ -133,17 +132,17 @@ Tabela *LerDados(char *NomeArquivo, int *num_registros) {
         campo++;
 
         //Move o ponteiro para o próximo caractere após o ';'
-        start = end + 1;
+        inicioString = fimString + 1;
     }
 
         //Exibe o Número de campos lidos
         printf("Campos lidos no registro %d: %d\n", i, campos_lidos);
 
         i++;
-
+        
+    }
         //Boa pratica de fechar o arquivo :)
         fclose(fp);
-}
     
 
     //retorna o número de registros lidos para o ponteiro num_registros, para uso na main.
